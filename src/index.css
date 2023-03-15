@@ -63,3 +63,13 @@ a {
   margin-top: 20px;
   background: linear-gradient(135deg, #ff0000 0%, #ff0000 100%);
 }
+.user-list {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-bottom: 1px solid gray;
+}
+.remove-user {
+  color: red;
+}

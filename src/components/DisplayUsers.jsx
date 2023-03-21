@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeUser } from '../store/slices/UserSlices';
+import DataTable from "react-data-table-component";
+import { UserListTable } from './UserListTable';
+import { getStudentList, deleteUserById } from '../store/actions';
 
 export default function DisplayUsers() {
 
@@ -9,20 +11,26 @@ export default function DisplayUsers() {
         return state.users
     })
 
-    const removeUserHandler = (index) => {
-        dispatch(removeUser(index));
+    const removeUserHandler = (id) => {
+        dispatch(deleteUserById(id));
     }
 
-    return (
-        <>
-            {userData && userData.map((user, index) => {
-                return <li key={index} className="user-list">
-                    <h3>{user}</h3>
-                    <div onClick={() => removeUserHandler(index)}><strong className="remove-user">X</strong></div>
-                </li>
-            })
+    useEffect(() => {
+        dispatch(getStudentList())
+    }, [])
 
-            }
-        </>
+    return (
+        <DataTable
+            title={"User Data"}
+            columns={UserListTable(removeUserHandler)}
+            data={userData.data}
+            pointerOnHover
+            fixedHeader
+            fixedHeaderScrollHeight={"calc(100vh - 226px)"}
+            pagination
+            highlightOnHover
+            progressPending={false}
+            paginationServer
+        />
     )
 }

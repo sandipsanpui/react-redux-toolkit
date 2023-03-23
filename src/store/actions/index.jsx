@@ -1,7 +1,3 @@
-import { createAction } from "@reduxjs/toolkit";
-
-export const deleteAllUsers = createAction("deleteAllUsers");
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
@@ -14,7 +10,7 @@ export const getStudentList = createAsyncThunk('student/getStudentList', async (
   }
 })
 
-export const deleteUserById = createAsyncThunk('student/deleteById', async(id, { rejectWithValue }) => {
+export const deleteStudentById = createAsyncThunk('student/deleteById', async(id, { rejectWithValue }) => {
     try {
         const { response } = await axios.delete(`${import.meta.env.VITE_REACT_APP_backendURL}/student/deleteById/${id}`);
         return id;
@@ -31,4 +27,13 @@ export const addNewStudent = createAsyncThunk('student/add', async(postDataObjec
       } catch (error) {
         return rejectWithValue(error.message);
       }
+})
+
+export const deleteAllStudent = createAsyncThunk('student/deleteAllStudent', async({ rejectWithValue }) => {
+  try {
+      const { data } = await axios.delete(`${import.meta.env.VITE_REACT_APP_backendURL}/student/deleteAllStudent`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
 })

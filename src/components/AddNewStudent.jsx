@@ -24,6 +24,15 @@ export default function AddNewStudent() {
     const closeStudentModal = () => {
         window.$("#addStudentModal").modal("hide");
         setIsShowModal(false);
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPhoneNo("");
+        setRollNo("");
+        setDepartment("");
+        setYear("");
+        setDateOfBirth("");
+        setMarried(false);
     }
 
     const handleChange = (event) => {
@@ -54,6 +63,10 @@ export default function AddNewStudent() {
         if(event.target.name == "married") {
             setMarried(event.target.checked)
         } 
+    }
+
+    const handleCheck = (event) => {
+        setMarried(event.target.checked)
     }
 
     const submitData = () => {
@@ -133,23 +146,20 @@ export default function AddNewStudent() {
                                         <input type="text" className="form-control" name="year" value={year} onChange={handleChange} minLength={"4"} maxLength={"4"} />
                                     </div>
                                 </div>
-                                {/* <div className="form-group row">
+                                <div className="form-group row">
                                     <div className={`col-md-3`}>
                                         <label class="switch">
-                                            Donate Now
+                                            Married
                                             <input
                                                 type="checkbox"
-                                                ref="married"
                                                 name="married"
-                                                onClick={(e) => {
-                                                    this.handleCheck(e);
-                                                }}
+                                                onClick={(e) => {handleCheck(e);}}
                                                 checked={married}
                                             />
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
-                                </div> */}
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Close</button>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteUserById, getStudentList, addNewStudent } from "../actions";
+import { deleteStudentById, getStudentList, addNewStudent, deleteAllStudent } from "../actions";
 
 const initialState = {
     data: [],
@@ -34,11 +34,11 @@ export const userSlice = createSlice({
             state.isSuccess = false;
             state.errorMessage = action.payload;
         }),
-        builder.addCase(deleteUserById.pending, (state, action) => {
+        builder.addCase(deleteStudentById.pending, (state, action) => {
             state.isLoading = true;
             state.isSuccess = false;
         }),
-        builder.addCase(deleteUserById.fulfilled, (state, action) => {
+        builder.addCase(deleteStudentById.fulfilled, (state, action) => {
             let userDataList = state.data;
             const index = userDataList && userDataList.findIndex((user) => user.id === action.payload);
             if(index > -1) {
@@ -48,7 +48,7 @@ export const userSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
         }),
-        builder.addCase(deleteUserById.rejected, (state, action) => {
+        builder.addCase(deleteStudentById.rejected, (state, action) => {
             
         }),
         builder.addCase(addNewStudent.pending, (state, action) => {
@@ -60,6 +60,19 @@ export const userSlice = createSlice({
             state.data.push(action.payload);
         }),
         builder.addCase(addNewStudent.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = false;
+            state.errorMessage = action.payload;
+        }),
+        builder.addCase(deleteAllStudent.pending, (state, action) => {
+            state.isLoading = true;
+        }),
+        builder.addCase(deleteAllStudent.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isSuccess = true;
+            state.data = []
+        }),
+        builder.addCase(deleteAllStudent.rejected, (state, action) => {
             state.isLoading = false;
             state.isSuccess = false;
             state.errorMessage = action.payload;

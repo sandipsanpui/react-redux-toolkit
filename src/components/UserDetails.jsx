@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddNewStudent from "./AddNewStudent";
-import DeleteAllUser from "./DeleteAllUser";
+import DeleteAllStudent from "./DeleteAllStudent";
 import DisplayUsers from "./DisplayUsers";
 
 const UserDetails = () => {
@@ -20,7 +20,7 @@ const UserDetails = () => {
     <div className="container">
       <AddNewStudent />
       <DisplayUsers />
-      {userData && userData.data.length > 0 && <DeleteAllUser />}
+      {userData && userData.data.length > 0 && <DeleteAllStudent />}
     </div>
   );
 };

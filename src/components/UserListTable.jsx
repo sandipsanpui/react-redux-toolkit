@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
-
-export const UserListTable = (removeUserHandler) => {
+export const UserListTable = (removeStudentHandler) => {
   return [
     {
       id: 1,
@@ -53,9 +51,12 @@ export const UserListTable = (removeUserHandler) => {
     },
     {
       id: 6,
-      name: "Delete",
+      name: "Action",
       cell: (row) => {
-        return <button className="btn btn-primary btn-lg" onClick={() => removeUserHandler(row.id)}>Delete</button>
+        return <>
+            <button className="btn btn-primary btn-md" onClick={() => removeUserHandler(row.id)}>Edit</button>
+            <button className="btn btn-primary btn-md" onClick={() => removeStudentHandler(row.id)}>Delete</button>
+          </>
       },
       sortable: true,
       reorder: true,

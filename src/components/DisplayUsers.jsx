@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import DataTable from "react-data-table-component";
 import { UserListTable } from './UserListTable';
-import { getStudentList, deleteUserById } from '../store/actions';
+import { getStudentList, deleteStudentById } from '../store/actions';
 
 export default function DisplayUsers() {
 
@@ -11,8 +11,8 @@ export default function DisplayUsers() {
         return state.users
     })
 
-    const removeUserHandler = (id) => {
-        dispatch(deleteUserById(id));
+    const removeStudentHandler = (id) => {
+        dispatch(deleteStudentById(id));
     }
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function DisplayUsers() {
     return (
         <DataTable
             title={"User Data"}
-            columns={UserListTable(removeUserHandler)}
+            columns={UserListTable(removeStudentHandler)}
             data={userData.data}
             pointerOnHover
             fixedHeader

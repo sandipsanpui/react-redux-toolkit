@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteStudentById, getStudentList, addNewStudent, deleteAllStudent } from "../actions";
+import { deleteStudentById, getStudentList, addNewStudent, deleteAllStudent, updateStudent } from "../actions";
 
 const initialState = {
     data: [],
@@ -76,6 +76,23 @@ export const userSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = false;
             state.errorMessage = action.payload;
+        }),
+        builder.addCase(updateStudent.pending, (state, action) => {
+            state.isLoading = true;
+            state.isSuccess = false;
+        }),
+        builder.addCase(updateStudent.fulfilled, (state, action) => {
+            let userDataList = state.data;
+            const index = userDataList && userDataList.findIndex((user) => user.id === action.payload.id);
+            if(index > -1) {
+                userDataList[index] = action.payload;
+            }
+            state.data = userDataList;
+            state.isLoading = false;
+            state.isSuccess = true;
+        }),
+        builder.addCase(updateStudent.rejected, (state, action) => {
+            
         })
     }
 })

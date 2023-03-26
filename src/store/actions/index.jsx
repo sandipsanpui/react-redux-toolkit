@@ -37,3 +37,13 @@ export const deleteAllStudent = createAsyncThunk('student/deleteAllStudent', asy
       return rejectWithValue(error.message);
     }
 })
+
+export const updateStudent = createAsyncThunk('student/update', async(postDataObject, { rejectWithValue }) => {
+  try {
+      const postData = postDataObject;
+      const { data } = await axios.post(`${import.meta.env.VITE_REACT_APP_backendURL}/student/update`, postData);
+      return postData;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+})

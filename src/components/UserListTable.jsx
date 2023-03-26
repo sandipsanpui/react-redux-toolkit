@@ -1,4 +1,4 @@
-export const UserListTable = (removeStudentHandler) => {
+export const UserListTable = (removeStudentHandler, editUserHandler) => {
   return [
     {
       id: 1,
@@ -54,7 +54,7 @@ export const UserListTable = (removeStudentHandler) => {
       name: "Action",
       cell: (row) => {
         return <>
-            <button className="btn btn-primary btn-md" onClick={() => removeUserHandler(row.id)}>Edit</button>
+            <button className="btn btn-primary btn-md" onClick={() => editUserHandler(row.id)}>Edit</button>
             <button className="btn btn-primary btn-md" onClick={() => removeStudentHandler(row.id)}>Delete</button>
           </>
       },
